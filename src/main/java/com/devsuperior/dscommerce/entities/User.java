@@ -14,6 +14,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    // garante que o campo email não se repita no banco de dados
+    @Column(unique = true)
     private String email;
     private String phone;
     private Locale birthDate;
