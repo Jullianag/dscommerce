@@ -30,6 +30,11 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
+    // Do outro lado na relação, no OrderItem, temos o id
+    // dentro do OrderItem temos o OrderItemPK que temos o Product
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items = new HashSet<>();
+
     public Product() {
     }
 

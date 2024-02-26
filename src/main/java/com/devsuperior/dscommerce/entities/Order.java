@@ -2,6 +2,8 @@ package com.devsuperior.dscommerce.entities;
 
 import jakarta.persistence.*;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_order")
@@ -25,6 +27,11 @@ public class Order {
     // relacionamento com payment (um para um)
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Payment payment;
+
+    // Do outro lado na relação, no OrderItem, temos o id
+    // dentro do OrderItem temos o OrderItemPK que temos o Order
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> items = new HashSet<>();
 
     public Order() {
     }
