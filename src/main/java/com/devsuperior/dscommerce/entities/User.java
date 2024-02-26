@@ -2,6 +2,7 @@ package com.devsuperior.dscommerce.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -19,7 +20,7 @@ public class User {
     @Column(unique = true)
     private String email;
     private String phone;
-    private Locale birthDate;
+    private LocalDate birthDate;
     private String password;
 
     // Lado "um" do relacionamento um para muitos
@@ -31,7 +32,7 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String name, String email, String phone, Locale birthDate, String password) {
+    public User(Long id, String name, String email, String phone, LocalDate birthDate, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -72,11 +73,11 @@ public class User {
         this.phone = phone;
     }
 
-    public Locale getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Locale birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
