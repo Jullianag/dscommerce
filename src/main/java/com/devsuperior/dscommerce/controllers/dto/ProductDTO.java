@@ -22,6 +22,7 @@ public class ProductDTO {
         this.imgUrl = imgUrl;
     }
 
+    // também é possível usar uma lib ModelMapper
     // outro construtor para facilitar na classe ProductService
     public ProductDTO(Product entity) {
         id = entity.getId();
