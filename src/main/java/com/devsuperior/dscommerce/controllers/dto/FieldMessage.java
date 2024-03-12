@@ -2,6 +2,7 @@ package com.devsuperior.dscommerce.controllers.dto;
 
 public class FieldMessage {
 
+    // Nome do campo e mensagem
     private String fieldName;
     private String message;
 
