@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -21,6 +22,7 @@ public class ProductController {
     @Autowired
     private ProductService service;
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')")
     @GetMapping(value = "/{id}")
     // @PathVariable está configurando o parâmetro de rota
         public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
@@ -41,6 +43,7 @@ public class ProductController {
         return ResponseEntity.ok(dto);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
     // @Valid irá validar as notations feitas nos atributos do ProductDTI
     public ResponseEntity<ProductDTO> insert(@Valid @RequestBody ProductDTO dto) {
