@@ -38,6 +38,8 @@ public class Role implements GrantedAuthority {
         this.authority = authority;
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

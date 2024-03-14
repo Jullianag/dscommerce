@@ -22,7 +22,6 @@ public class ProductController {
     @Autowired
     private ProductService service;
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_OPERATOR')")
     @GetMapping(value = "/{id}")
     // @PathVariable está configurando o parâmetro de rota
         public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
@@ -43,7 +42,7 @@ public class ProductController {
         return ResponseEntity.ok(dto);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping
     // @Valid irá validar as notations feitas nos atributos do ProductDTI
     public ResponseEntity<ProductDTO> insert(@Valid @RequestBody ProductDTO dto) {
@@ -53,6 +52,7 @@ public class ProductController {
         return ResponseEntity.created(uri).body(dto);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PutMapping(value = "/{id}")
     // @Valid é no corpo e não na PathVariable
     public ResponseEntity<ProductDTO> update(@PathVariable Long id, @Valid @RequestBody ProductDTO dto) {
@@ -60,6 +60,7 @@ public class ProductController {
         return ResponseEntity.ok(dto);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
