@@ -24,13 +24,10 @@ public class UserController {
     @Autowired
     private UserService service;
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CLIENT')")
     @GetMapping(value = "/me")
     // @PathVariable está configurando o parâmetro de rota
         public ResponseEntity<UserDTO> getMe() {
-        /*
-            ProductDTO dto = service.findById(id);
-            return dto;
-        */
         UserDTO dto =  service.getMe();
         return ResponseEntity.ok(dto);
     }
