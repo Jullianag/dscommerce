@@ -1,8 +1,12 @@
 package com.devsuperior.dscommerce.controllers.dto;
 
 
+import com.devsuperior.dscommerce.entities.Category;
 import com.devsuperior.dscommerce.entities.Product;
 import jakarta.validation.constraints.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductDTO {
 
@@ -18,6 +22,10 @@ public class ProductDTO {
     private Double price;
     private String imgUrl;
 
+    // criado após criar o CategoryDTO, fazer o Getter dele
+    @NotEmpty(message = "Deve haver pelo menos uma categoria!")
+    private List<CategoryDTO> categories = new ArrayList<>();
+
     public ProductDTO(Long id, String name, String description, Double price, String imgUrl) {
         this.id = id;
         this.name = name;
@@ -28,12 +36,16 @@ public class ProductDTO {
 
     // também é possível usar uma lib ModelMapper
     // outro construtor para facilitar na classe ProductService
+    // acrescentar o For com Category
     public ProductDTO(Product entity) {
         id = entity.getId();
         name = entity.getName();
         description = entity.getDescription();
         price = entity.getPrice();
         imgUrl = entity.getImgUrl();
+        for (Category cat : entity.getCategories()) {
+            categories.add(new CategoryDTO(cat));
+        }
     }
 
     // DTO não é necessário colocar Setters
@@ -56,5 +68,9 @@ public class ProductDTO {
 
     public String getImgUrl() {
         return imgUrl;
+    }
+
+    public List<CategoryDTO> getCategories() {
+        return categories;
     }
 }
