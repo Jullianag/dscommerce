@@ -89,7 +89,7 @@ public class ProductService {
         entity.setDescription(dto.getDescription());
         entity.setPrice(dto.getPrice());
         entity.setImgUrl(dto.getImgUrl());
-        
+
         // para limpar a lista de categoria antes de inserir as novas
         entity.getCategories().clear();
         for (CategoryDTO catDto : dto.getCategories()) {
